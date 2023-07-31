@@ -4,9 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -22,7 +20,7 @@ class ConstruireMainCommand extends Command
     {
         $this
             // the command help shown when running the command with the "--help" option
-            ->setHelp('This command allows you to create a user...')
+            ->setHelp('jeu de cartes...')
         ;
     }
 
@@ -31,17 +29,14 @@ class ConstruireMainCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $output->writeln([
-            'User Creator',
+            'Le test technique consiste à développer un jeu de cartes en utilisant PHP/Symfony, où un joueur tire 
+             une main de 10 cartes de manière aléatoire, avec des couleurs et des valeurs définies aléatoirement, 
+             puis présente la main "non triée" à l\'écran, suivie de la main triée selon un ordre aléatoire 
+             défini pour les couleurs et les valeurs.',
             '============',
             '',
         ]);
 
-        // the value returned by someMethod() can be an iterator (https://php.net/iterator)
-        // that generates and returns the messages with the 'yield' PHP keyword
-//        $output->writeln($this->someMethod());
-
-        // outputs a message followed by a "\n"
-        $output->writeln('Whoa!');
 
         echo "Main non triée :\n";
         $main = $this->genererMainAleatoire($this->genererOrdreAleatoireCouleurs(), $this->genererOrdreAleatoireValeurs());
@@ -54,11 +49,6 @@ class ConstruireMainCommand extends Command
         foreach ($mainTriee as $carte) {
             $output->write( $carte['couleur'] . ' - ' . $carte['valeur'] . "\n");
         }
-
-
-        // outputs a message without adding a "\n" at the end of the line
-        $output->write('You are about to ');
-        $output->write('create a user.');
 
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
@@ -103,13 +93,4 @@ class ConstruireMainCommand extends Command
         });
         return $main;
     }
-
-
-
-
-
-
-
-
-
 }
